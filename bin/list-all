@@ -1,0 +1,3 @@
+#!/usr/bin/env bash
+
+git ls-remote --tags https://chromium.googlesource.com/chromium/src | sed -e 's/.*refs\/tags\/\(.*\)/\1/' | tr '\n' ' '

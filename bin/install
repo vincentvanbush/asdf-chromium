@@ -1,0 +1,14 @@
+#!/usr/bin/env bash
+
+#REVISION=`git ls-remote --tags https://chromium.googlesource.com/chromium/src "$ASDF_INSTALL_VERSION" | cut -f1`
+#echo $REVISION
+
+POSITION=`curl -sS https://omahaproxy.appspot.com/deps.json?version=$ASDF_INSTALL_VERSION | grep -Eo '\"chromium_base_position\":[ ]*\"[0-9]*\"' | sed -e 's/[^0-9]*//g'`
+echo "Installing Chromium (revision $POSITION), directory: $ASDF_INSTALL_PATH"
+
+wget -O "$ASDF_INSTALL_PATH/chromium.zip" "https://gsdview.appspot.com/chromium-browser-snapshots/Linux_x64/$POSITION/chrome-linux.zip"
+
+echo "Downloaded version $ASDF_INSTALL_VERSION"
+
+cd "$ASDF_INSTALL_PATH"
+unzip chromium.zip
