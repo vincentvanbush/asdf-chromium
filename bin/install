@@ -12,3 +12,13 @@ echo "Downloaded version $ASDF_INSTALL_VERSION"
 
 cd "$ASDF_INSTALL_PATH"
 unzip chromium.zip
+rm chromium.zip
+
+cd chrome-linux
+mv chrome actual-chrome
+
+echo '#!/usr/bin/env bash
+DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"' > chrome
+
+echo "\"\$DIR/actual-chrome\" --profile-directory=$POSITION" >> chrome
+chmod u+x chrome
